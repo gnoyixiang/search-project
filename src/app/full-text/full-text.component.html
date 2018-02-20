@@ -4,23 +4,24 @@
 <div *ngIf="fullTextItem.text_id != undefined">
   <div class="row">
     <div class="col-md-4">
-      Text ID: {{fullTextItem.text_id}}
+      Text ID: <b>{{fullTextItem.text_id}}</b>
     </div>
     <div class="col-md-4">
-      Year: {{fullTextItem.year}}
+      Year: <b>{{fullTextItem.year}}</b>
     </div>
     <div class="col-md-4">
-      Genre: {{fullTextItem.genre}}
+      Genre: <b>{{fullTextItem.genre}}</b>
     </div>
   </div>
   <div class="row">
     <div class="col-md-12">
-      Title: {{fullTextItem.title}}
+      Title: <b>{{fullTextItem.title}}</b>
     </div>
   </div>
+  <hr>
   <div class="row">
     <div class="col-md-12">
-      {{fullTextItem.context}}
+      <p id="text">{{fullTextItem.context}}</p>
     </div>
   </div>
 <div>

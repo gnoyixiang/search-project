@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Oxygen+Mono|Roboto|Open+Sans');
 body{
-  font-size: 13px !important;
+  font-size: 12px !important;
+  font-family: 'Open Sans', monospace !important;
 }
 div{
   font-size: inherit;
