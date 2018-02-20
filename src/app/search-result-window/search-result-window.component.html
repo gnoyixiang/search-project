@@ -1,0 +1,9 @@
+<div>
+  <tabset [justified]="true">
+    <tab heading="Search" (select)="redirectTo('/search')" [active]="isCurrentRoute('/search')"></tab>
+    <tab heading="Results" (select)="redirectTo('/table')" [active]="isCurrentRoute('/table')"></tab>
+    <tab heading="Full Text" (select)="redirectTo('/text')" [active]="isCurrentRoute('/text')"></tab>
+    <tab heading="Visualization" (select)="redirectTo('/visual')" [active]="isCurrentRoute('/visual')"></tab>
+  </tabset>
+</div>
+<router-outlet></router-outlet>

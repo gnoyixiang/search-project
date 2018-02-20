@@ -1,0 +1,38 @@
+<div class="row" *ngIf="!isLoading && hasError">
+  <div class="col-md-12">
+    <p>Error in retrieving data!</p>
+  </div>
+</div>
+<div class="row" *ngIf="isLoading ">
+  <div class="col-md-12">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+</div>
+<div class="row" *ngIf="!isLoading && fullTextItem.text_id === undefined  && !hasError">
+  <div class="col-md-12">
+    <p>No results found!</p>
+  </div>
+</div>
+<div *ngIf="fullTextItem.text_id != undefined">
+  <div class="row">
+    <div class="col-md-4">
+      Text ID: {{fullTextItem.text_id}}
+    </div>
+    <div class="col-md-4">
+      Year: {{fullTextItem.year}}
+    </div>
+    <div class="col-md-4">
+      Genre: {{fullTextItem.genre}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      Title: {{fullTextItem.title}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      {{fullTextItem.context}}
+    </div>
+  </div>
+<div>

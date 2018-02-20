@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+  font-size: 13px !important;
+}
+div{
+  font-size: inherit;
+}
+.inline-form{
+  width:auto;
+  display:inline-block;
+}
+.full-width{
+  width:100%;
+}
+.row{
+  margin-top:20px;
+}
+textarea{
+  resize:none;
+}
+.ngx-pagination{
+  padding-left: 0px;
+}
+
+.form-control{
+  font-size: inherit;
+}
+.btn{
+  font-size: inherit;
+}
+.input-group-text{
+  font-size: inherit;
+}
