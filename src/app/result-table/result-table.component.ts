@@ -5,8 +5,8 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/toPromise';
 
-import { SearchService } from '../search.service'
-import { SearchResult } from '../search-result'
+import { SearchService } from '../search.service';
+import { SearchResult } from '../search-result';
 
 @Component({
   selector: 'app-result-table-component',

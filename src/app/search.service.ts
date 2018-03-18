@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { SearchResult } from './search-result';
+import { AnalysisData } from './analysis-data';
 
 @Injectable()
 export class SearchService {
@@ -11,16 +12,19 @@ export class SearchService {
   private readonly url = 'http://localhost/';
   private readonly search_endpoint = 'context';
   private readonly fullText_endpoint = 'fullText';
+  private readonly analysis_endpoint = 'analysis';
   private readonly defaultWindow = 20;
 
   private data_rows = new Array<SearchResult>();
-  private loading = false;
   private fullTextItem = new SearchResult();
+  private analysis_data = new Array<AnalysisData>();  
+  private loading = false;
   private error = false;
 
   dataSubject = new BehaviorSubject<SearchResult[]>(this.getData());
   loadingSubject = new BehaviorSubject<boolean>(this.getLoading());
   fullTextSubject = new BehaviorSubject<SearchResult>(this.getFullTextItem());
+  analysisSubject = new BehaviorSubject<AnalysisData[]>(this.getAnalysisData());
   errorSubject = new BehaviorSubject<boolean>(this.getError());
 
   constructor(private http: HttpClient) {}
@@ -28,7 +32,7 @@ export class SearchService {
   getSearchList(search:string, synonyms:string, window:string) {
     console.log('>>> enter getSearchList()');
     this.setLoading(true);
-    this.setData(new Array<SearchResult>());
+    this.setSearchResult(new Array<SearchResult>());
     let qs = new HttpParams()
       .set('keyword', !search? " ": search)
       .set('synonyms', !synonyms? " ": synonyms)
@@ -39,14 +43,14 @@ export class SearchService {
       .toPromise()
       .then(
         (result) => {
-          this.setData(this.fillData(result));
+          this.setSearchResult(this.fillSearchData(result));
           this.setLoading(false);
           this.setError(false);
         }
       )
       .catch(
         (error) => {
-          this.setData(new Array<SearchResult>());
+          this.setSearchResult(new Array<SearchResult>());
           this.setLoading(false);
           this.setError(true);
         }
@@ -57,7 +61,7 @@ export class SearchService {
     console.log('>>> enter getFullText()');
     this.setLoading(true);
     this.setFullText(new SearchResult());
-    let qs = new HttpParams().set('id', !id? "": id)
+    let qs = new HttpParams().set('id', !id? "": id);
     this.http.get(this.url + this.fullText_endpoint, {params: qs})
       .take(1) //from observable take 1 from the stream
       .toPromise()
@@ -77,7 +81,33 @@ export class SearchService {
       )
       .catch(
         (error) => {
-          this.setData(new Array<SearchResult>());
+          this.setSearchResult(new Array<SearchResult>());
+          this.setLoading(false);
+          this.setError(true);
+        }
+      );
+  }
+
+  getAnalysis(search:string, synonyms:string){
+    console.log('>>> enter getAnalysis()');
+    this.setLoading(true);
+    // this.setFullText(new SearchResult());
+    let qs = new HttpParams()
+      .set('word', search)
+      .set('synonym', synonyms);
+    this.http.get(this.url + this.analysis_endpoint, {params: qs})
+      .take(1) //from observable take 1 from the stream
+      .toPromise()
+      .then(
+        (result) => {
+          this.setAnaysisData(this.fillAnalysisData(result));
+          this.setLoading(false);
+          this.setError(false);
+        }
+      )
+      .catch(
+        (error) => {
+          this.setAnaysisData(new Array<AnalysisData>());
           this.setLoading(false);
           this.setError(true);
         }
@@ -96,6 +126,10 @@ export class SearchService {
     return this.data_rows;
   }
 
+  getAnalysisData(){
+    return this.analysis_data;
+  }
+
   getLoading(){
     return this.loading;
   }
@@ -110,9 +144,14 @@ export class SearchService {
     this.fullTextSubject.next(result);
   }
 
-  setData(result:Array<SearchResult>){
+  setSearchResult(result:Array<SearchResult>){
     this.data_rows = result;
     this.dataSubject.next(result);
+  }
+
+  setAnaysisData(result:Array<AnalysisData>){
+    this.analysis_data = result;
+    this.analysisSubject.next(result);
   }
 
   setLoading(result:boolean){
@@ -120,7 +159,7 @@ export class SearchService {
     this.loadingSubject.next(result);
   }
 
-  fillData(result: any):Array<SearchResult>{
+  fillSearchData(result: any):Array<SearchResult>{
     let data = new Array<SearchResult>();
     for(let r of result){
       data.push({
@@ -129,6 +168,20 @@ export class SearchService {
         genre: r["Genre"],
         title: r["Title"],
         context: r["Context"]
+      });
+    }
+    return data;
+  }
+
+  fillAnalysisData(result: any):Array<AnalysisData>{
+    let data = new Array<AnalysisData>();
+    for(let r of result){
+      data.push({
+        word: r["word"],
+        freq: r["freq_near_target_word"],
+        workCheck: r["word_check"],
+        miScore: r["MI_Score"],
+        dataName: r["Dataname"]
       });
     }
     return data;

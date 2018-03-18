@@ -1,0 +1,7 @@
+<div>
+  <tabset [justified]="true">
+    <tab heading="Line Chart" (select)="redirectTo('/chart/line')" [active]="isCurrentRoute('/chart/line')"></tab>
+    <tab heading="Bubble Chart" (select)="redirectTo('/chart/bubble')" [active]="isCurrentRoute('/chart/bubble')"></tab>
+  </tabset>
+</div>
+<router-outlet></router-outlet>

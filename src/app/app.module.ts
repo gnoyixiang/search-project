@@ -17,6 +17,9 @@ import { ErrorComponent } from './error/error.component';
 import { NoResultsComponent } from './no-results/no-results.component';
 import { HomeComponent } from './home/home.component';
 import { InfoComponent } from './info/info.component';
+import { BubbleChartComponent } from './bubble-chart/bubble-chart.component';
+import { LineChartComponent } from './line-chart/line-chart.component';
+import { ChartComponent } from './chart/chart.component';
 
 const appRoutes: Routes = [
   { path: '',
@@ -28,8 +31,15 @@ const appRoutes: Routes = [
         component: ResultTableComponent },
       { path: 'text',
         component: FullTextComponent },
-      { path: 'visual',
-        component: FullTextComponent },
+      { path: 'chart',
+        component: ChartComponent,
+        children:[
+          { path: 'line',
+            component: LineChartComponent },
+          { path: 'bubble',
+            component: BubbleChartComponent }
+        ]
+      },
       { path: '**',
         redirectTo: '/home',
         pathMatch: 'full' }
@@ -49,7 +59,10 @@ const appRoutes: Routes = [
     ErrorComponent,
     NoResultsComponent,
     HomeComponent,
-    InfoComponent
+    InfoComponent,
+    BubbleChartComponent,
+    LineChartComponent,
+    ChartComponent,
   ],
   imports: [
     RouterModule.forRoot(

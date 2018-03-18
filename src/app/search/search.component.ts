@@ -32,6 +32,7 @@ export class SearchComponent implements OnInit {
     let window = this.searchForm.value.window;
 
     this.searchService.getSearchList(keyword, synonyms, window);
+    this.searchService.getAnalysis(keyword, synonyms);
 
     this.router.navigate(['/table']);
     // this.router.navigate(['/result/table'],
