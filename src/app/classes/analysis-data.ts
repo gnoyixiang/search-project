@@ -2,7 +2,7 @@ export class AnalysisData{
     word:string;
     freq:number;
     workCheck:string;
-    miScore:number;
+    neg_pos:number;
     dataName:string;
   }
   

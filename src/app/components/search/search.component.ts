@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
-import { SearchService } from '../search.service';
+import { SearchService } from '../../services/search.service';
+import { AnalysisService } from '../../services/analysis.service';
 
 @Component({
   selector: 'app-search-component',
@@ -20,7 +21,8 @@ export class SearchComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private analysisService: AnalysisService
   ) { }
 
   ngOnInit() {
@@ -32,7 +34,7 @@ export class SearchComponent implements OnInit {
     let window = this.searchForm.value.window;
 
     this.searchService.getSearchList(keyword, synonyms, window);
-    this.searchService.getAnalysis(keyword, synonyms);
+    this.analysisService.getAnalysis(keyword, synonyms);
 
     this.router.navigate(['/table']);
     // this.router.navigate(['/result/table'],

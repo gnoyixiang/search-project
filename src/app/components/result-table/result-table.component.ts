@@ -5,8 +5,8 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/toPromise';
 
-import { SearchService } from '../search.service';
-import { SearchResult } from '../search-result';
+import { SearchService } from '../../services/search.service';
+import { SearchResult } from '../../classes/search-result';
 
 @Component({
   selector: 'app-result-table-component',
@@ -48,11 +48,11 @@ export class ResultTableComponent implements OnInit, OnDestroy {
   subscribeError(){
     this.subHasError = this.searchService.errorSubject.subscribe(
       (data) => {
-        console.log('>>> data in error subject subscription ' + data);
+        console.log('>>> search >>> data in error subject subscription ' + data);
         this.hasError = data;
       },
       (error) => {
-        console.log('>>> error in loading subject subscription ' + error);
+        console.log('>>> search >>> error in loading subject subscription ' + error);
       }
     )
   }
@@ -60,11 +60,11 @@ export class ResultTableComponent implements OnInit, OnDestroy {
   subscribeLoading(){
     this.subIsLoading = this.searchService.loadingSubject.subscribe(
       (data) => {
-        console.log('>>> data in loading subject subscription ' + data);
+        console.log('>>> search >>> data in loading subject subscription ' + data);
         this.isLoading = data;
       },
       (error) => {
-        console.log('>>> error in loading subject subscription ' + error);
+        console.log('>>> search >>> error in loading subject subscription ' + error);
       }
     )
   }
@@ -72,12 +72,12 @@ export class ResultTableComponent implements OnInit, OnDestroy {
   subscribeData(){
     this.subData = this.searchService.dataSubject.subscribe(
       (data) => {
-        console.log('>>> data in data subject subscription ' + data.length);
+        console.log('>>> search >>> data in data subject subscription ' + data.length);
         this.data_rows = data;
         this.bigTotalItems = this.data_rows.length;
       },
       (error) => {
-        console.log('>>> error in data subject subscription ' + error);
+        console.log('>>> search >>> error in data subject subscription ' + error);
       }
     )
   }

@@ -3,8 +3,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
-import { SearchService } from '../search.service';
-import { SearchResult } from '../search-result';
+import { SearchService } from '../../services/search.service';
+import { SearchResult } from '../../classes/search-result';
 
 @Component({
   selector: 'app-full-text',
