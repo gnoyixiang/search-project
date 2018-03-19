@@ -9,7 +9,7 @@ import { AnalysisData } from '../../classes/analysis-data';
 import { AnalysisService } from '../../services/analysis.service';
 
 import * as d3 from 'd3';
-import * as d3Chromatic from 'd3-scale-chromatic';
+// import * as d3Chromatic from 'd3-scale-chromatic';
 import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
