@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HttpClientModule} from "@angular/common/http";
 import { RouterModule, Routes } from '@angular/router';
 import { TabsModule, PaginationModule } from 'ngx-bootstrap';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
+import { IonRangeSliderModule } from "ng2-ion-range-slider";
 
 import { AppComponent } from './app.component';
 import { SearchComponent } from './components/search/search.component';
@@ -22,6 +24,9 @@ import { ChartComponent } from './components/chart/chart.component';
 
 import { SearchService } from './services/search.service';
 import { AnalysisService } from './services/analysis.service';
+import { DraggableDirective } from './d3/directives/draggable.directive';
+import { GenreComponent } from './components/genre/genre.component';
+import { LineService } from './services/line.service';
 
 const appRoutes: Routes = [
   { path: '',
@@ -65,6 +70,8 @@ const appRoutes: Routes = [
     BubbleChartComponent,
     LineChartComponent,
     ChartComponent,
+    DraggableDirective,
+    GenreComponent,
   ],
   imports: [
     RouterModule.forRoot(
@@ -77,10 +84,13 @@ const appRoutes: Routes = [
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    AngularMultiSelectModule,
+    IonRangeSliderModule,
   ],
   providers: [
     SearchService, 
-    AnalysisService
+    AnalysisService,
+    LineService
   ],
   bootstrap: [AppComponent]
 })

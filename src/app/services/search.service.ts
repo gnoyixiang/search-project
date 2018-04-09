@@ -36,23 +36,20 @@ export class SearchService {
       .set('window', !isNaN(parseInt(window))? this.defaultWindow.toString(): window);
     //search
     this.http.get(this.url + this.search_endpoint, {params: qs})
-      .take(1) //from observable take 1 from the stream
-      .toPromise()
-      .then(
-        (result) => {
-          console.log(">>> search result: " + result);
+      .subscribe(
+        result => {
+          console.log(">>> search result: ", result);
           this.setSearchResult(this.fillSearchData(result));
           this.setLoading(false);
           this.setError(false);
-        }
-      )
-      .catch(
-        (error) => {
+        },
+        error => {
           this.setSearchResult(new Array<SearchResult>());
           this.setLoading(false);
           this.setError(true);
         }
-      );
+      )
+      
   }
 
   getFullText(id:string){
@@ -61,10 +58,8 @@ export class SearchService {
     this.setFullText(new SearchResult());
     let qs = new HttpParams().set('id', !id? "": id);
     this.http.get(this.url + this.fullText_endpoint, {params: qs})
-      .take(1) //from observable take 1 from the stream
-      .toPromise()
-      .then(
-        (result) => {
+      .subscribe(
+        result => {
           console.log('>>> result of getFullText() ' + result[0].toString());
           this.setFullText({
             text_id: result[0]["Text_ID"],
@@ -75,14 +70,12 @@ export class SearchService {
           });
           this.setLoading(false);
           this.setError(false);
-        }
-      )
-      .catch(
+        },
         (error) => {
           this.setSearchResult(new Array<SearchResult>());
           this.setLoading(false);
           this.setError(true);
-        }
+        }        
       );
   }
 

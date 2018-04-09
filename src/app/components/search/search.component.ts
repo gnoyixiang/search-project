@@ -4,6 +4,8 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import { SearchService } from '../../services/search.service';
 import { AnalysisService } from '../../services/analysis.service';
+import { LineService } from '../../services/line.service';
+
 
 @Component({
   selector: 'app-search-component',
@@ -22,7 +24,8 @@ export class SearchComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private searchService: SearchService,
-    private analysisService: AnalysisService
+    private analysisService: AnalysisService,
+    private lineService: LineService
   ) { }
 
   ngOnInit() {
@@ -35,6 +38,7 @@ export class SearchComponent implements OnInit {
 
     this.searchService.getSearchList(keyword, synonyms, window);
     this.analysisService.getAnalysis(keyword, synonyms);
+    this.lineService.getLine(keyword, synonyms);
 
     this.router.navigate(['/table']);
     // this.router.navigate(['/result/table'],

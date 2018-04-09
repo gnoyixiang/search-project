@@ -1,3 +1,6 @@
 .container{
   padding-top: 20px;
 }
+path.highcharts-point.highcharts-color-1{
+  fill:transparent
+}

@@ -5,3 +5,64 @@
   .bar:hover {
     fill: #0080FF
   }
+
+.inline {
+  display: inline-block;  
+}
+
+.float-right{
+  float: right;
+}
+
+.float-left{
+  float: left;
+}
+
+.legend{
+  display: inline-block;
+  min-width: 18%;
+}
+.legend-label{
+  display: inline-block;
+  min-width:5%  
+}
+.legend1{
+  background-color: #FC1212;
+}
+.legend2{
+  background-color: #F5894E;
+}
+.legend3{
+  background-color: #DEDAD7;
+}
+.legend4{
+  background-color: #AFC7F0;
+}
+.legend5{
+  background-color: #387AEB;
+}
+.checkbox{
+  display: inline-block;
+  min-width: 25%;
+}
+.right{
+  text-align: right;
+}
+.left{
+  text-align: left;
+}
+.center{
+  text-align: center;
+}
+
+.irs-line-mid,
+.irs-line-left,
+.irs-line-right,
+.irs-bar,
+.irs-bar-edge,
+.irs-slider {
+    background: url(../../../assets/img/sprite-skin-flat-custom-grey.png) repeat-x;
+}
+
+.irs-from, .irs-to, .irs-single {
+}

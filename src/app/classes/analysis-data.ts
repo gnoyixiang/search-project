@@ -4,5 +4,7 @@ export class AnalysisData{
     workCheck:string;
     neg_pos:number;
     dataName:string;
+    genre:string;
+    decade:string;
   }
   

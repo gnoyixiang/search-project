@@ -1,0 +1,76 @@
+<app-error *ngIf="!isLoading && hasError"></app-error>
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+<app-no-results *ngIf="!isLoading && analysis_data.length==0 && !hasError"></app-no-results>
+
+<form #filterForm="ngForm" class="col-md-12" *ngIf="!isLoading && !hasError && analysis_data.length!=0">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <!-- <label for="selectGenre">Genre: <span *ngFor="let genre of selected_genres">{{genre}}, </span></label>
+                <select class="form-control" id="selectGenre" name="genres" (click)="filter()" multiple ngModel>                 
+                    <option *ngFor="let g of genres">{{g}}</option>
+                </select> -->
+                <label for="genres">Genre:</label><br>
+                <div *ngFor="let genre of selected_genres" class="checkbox">
+                    <label>
+                        <input type="checkbox"
+                               name="genres"
+                               value="{{genre.name}}"
+                               [(ngModel)]="genre.checked"
+                               (change)="doFilter()"/>
+                        {{genre.name}}
+                    </label>
+                </div>             
+            </div>
+        </div>
+        <div class="col-md-4">
+            Decades:
+            <ion-range-slider #decadeSlider
+                type="double"
+                [min]="decade_range.from"
+                [max]="decade_range.to"
+                [from]="selected_decade_range.from"
+                step="10"
+                [to]="selected_decade_range.to"                
+                decorate_both="false"
+                (onUpdate)="decadeOnUpdate($event)"
+                (onChange)="decadeOnChange($event)"
+                (onFinish)="decadeOnFinish($event)">
+            </ion-range-slider>
+        </div>
+        <div class="col-md-4">
+            Frequency:
+            <ion-range-slider #freqSlider
+                type="double"
+                [min]="freq_range.from"
+                [max]="freq_range.to"
+                [from]="selected_freq_range.from"
+                step="1"
+                [to]="selected_freq_range.to"                
+                decorate_both="false"
+                (onUpdate)="freqOnUpdate($event)"
+                (onChange)="freqOnChange($event)"
+                (onFinish)="freqOnFinish($event)">
+            </ion-range-slider>
+        </div>     
+        
+    </div> 
+    <hr>
+    <div class="row">
+        <div class="col-md-4">
+            <div>
+                <div class="float-left inline">Negative</div>
+                <div class="float-right inline">Positive</div>
+            </div>
+            <br>
+            <div>
+                <div class="legend-label left">1</div><div class="legend legend1">&nbsp;</div
+                    ><div class="legend legend2">&nbsp;</div
+                    ><div class="legend legend3">&nbsp;</div
+                    ><div class="legend legend4">&nbsp;</div
+                    ><div class="legend legend5">&nbsp;</div><div class="legend-label right">5</div>    
+            </div>                      
+        </div>
+    </div>    
+</form>
+<div class="row" id="chart" (window:resize)="onResize($event)"></div>

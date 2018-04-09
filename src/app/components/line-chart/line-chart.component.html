@@ -1,3 +1,43 @@
-<div #chartTarget>
-  chart target
+<app-error *ngIf="!isLoading && hasError"></app-error>
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+<app-no-results *ngIf="!isLoading && line_data.length==0 && !hasError"></app-no-results>
+<div *ngIf="line_data.length!=0">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="genres">Category:</label>
+        <br>
+        <div *ngFor="let category of selected_categories" class="checkbox">
+          <label>
+            <input type="checkbox" name="genres" value="{{category.name}}" [(ngModel)]="category.checked" (change)="filter()" 
+            /> {{category.name}}
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="display">Display Option:</label>
+        <br>
+        <div *ngFor="let option of display_options" class="radio">
+          <label>
+            <input type="radio" name="display" value="{{option.name}}" [(checked)]="option.checked" (change)="displayChange($event)" 
+            /> {{option.name}}
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="display">Data Type:</label>
+        <br>
+        <select [(ngModel)]="selected_data_type" (change)="dataChange($event)">
+            <option *ngFor="let data of line_data_type" [value]="data">{{data}}</option>
+      </select>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" >
+  <div class="col-md-12" id="chart" (window:resize)="onResize($event)"></div>
 </div>
