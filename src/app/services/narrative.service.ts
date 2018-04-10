@@ -49,7 +49,7 @@ export class NarrativeService {
         .set('word', search)
         .set('synonym', synonyms)
         .set('data_genre', genre)
-        .set('timeframe', timeframe.toString()); 
+        .set('timeframe', (timeframe+1).toString()); 
       this.http.get(this.url + this.narrative_endpoint, {params: qs})
         .subscribe(
           result => {
@@ -131,10 +131,7 @@ export class NarrativeService {
   }
 
   getTimeFrameIndex(timeframe: string){
-    this.timeframe_list.forEach((t,i)=>{
-      if(t==timeframe) return i;
-    })
-    return 1;
+    return this.timeframe_list.indexOf(timeframe);
   }
 
   getTimeFrameText(index: number){
