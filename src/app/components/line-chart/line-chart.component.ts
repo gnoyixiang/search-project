@@ -86,7 +86,7 @@ export class LineChartComponent implements OnInit {
                 this.hasError = data;
             },
             (error) => {
-                console.log('>>> line >>> error in loading subject subscription ', error);
+                console.log('>>> line >>> error in error subject subscription ', error);
             }
         )
     }

@@ -34,8 +34,8 @@ export class LineService {
       let qs = new HttpParams()
         .set('word', search)
         .set('synonym', synonyms); 
-      // this.http.get(this.url + this.line_endpoint, {params: qs})
-      this.http.get(this.url + this.line_endpoint) 
+      this.http.get(this.url + this.line_endpoint, {params: qs})
+      // this.http.get(this.url + this.line_endpoint) 
         .subscribe(
           result => {
             console.log(">>> line result: ", result);          

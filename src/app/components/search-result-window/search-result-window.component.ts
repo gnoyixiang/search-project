@@ -27,4 +27,8 @@ export class SearchResultWindowComponent implements OnInit {
     return this.router.url === route;
   }
 
+  isContainRoute(route:string){
+    return this.router.url.includes(route);
+  }
+
 }

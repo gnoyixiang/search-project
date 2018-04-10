@@ -21,12 +21,15 @@ import { InfoComponent } from './components/info/info.component';
 import { BubbleChartComponent } from './components/bubble-chart/bubble-chart.component';
 import { LineChartComponent } from './components/line-chart/line-chart.component';
 import { ChartComponent } from './components/chart/chart.component';
+import { NarrativeComponent } from './components/narrative/narrative.component';
 
 import { SearchService } from './services/search.service';
 import { AnalysisService } from './services/analysis.service';
 import { DraggableDirective } from './d3/directives/draggable.directive';
 import { GenreComponent } from './components/genre/genre.component';
 import { LineService } from './services/line.service';
+import { NarrativeService } from './services/narrative.service';
+
 
 const appRoutes: Routes = [
   { path: '',
@@ -44,9 +47,14 @@ const appRoutes: Routes = [
           { path: 'line',
             component: LineChartComponent },
           { path: 'bubble',
-            component: BubbleChartComponent }
+            component: BubbleChartComponent },
+          { path: '**',
+            redirectTo: 'bubble',
+            pathMatch: 'full' }
         ]
       },
+      { path: 'narrative',
+        component: NarrativeComponent },
       { path: '**',
         redirectTo: '/home',
         pathMatch: 'full' }
@@ -72,6 +80,7 @@ const appRoutes: Routes = [
     ChartComponent,
     DraggableDirective,
     GenreComponent,
+    NarrativeComponent,
   ],
   imports: [
     RouterModule.forRoot(
@@ -90,7 +99,8 @@ const appRoutes: Routes = [
   providers: [
     SearchService, 
     AnalysisService,
-    LineService
+    LineService,
+    NarrativeService
   ],
   bootstrap: [AppComponent]
 })

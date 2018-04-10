@@ -1,0 +1,40 @@
+<div class="row" *ngIf="!isLoading">
+  <div class="col-sm-4">
+    <div class="form-group">
+      <label for="display">Genre:</label>
+      <br>
+      <select [(ngModel)]="selected_genre" (change)="genreChange($event)">
+          <option *ngFor="let genre of genre_list" [value]="genre">{{genre}}</option>
+    </select>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="form-group">
+      <label for="display">Time Frame:</label>
+      <br>
+      <select [(ngModel)]="selected_timeframe" (change)="timeframeChange($event)">
+          <option *ngFor="let timeframe of timeframe_list" [value]="timeframe">{{timeframe}}</option>
+      </select>
+    </div>
+  </div>
+</div>
+<app-error *ngIf="!isLoading && hasError"></app-error>
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+<app-no-results *ngIf="!isLoading && narrative_data.length==0 && !hasError"></app-no-results>
+<div class="row" *ngIf="!isLoading && narrative_data.length!=0 && !hasError">
+  <div class="col-md 12">
+    <table class="table table-bordered table-striped">
+      <thead>
+        <th *ngFor="let key of narrative_keys">{{key}}</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of narrative_data">
+          <td *ngFor="let d of data">{{d}}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <th *ngFor="let freq of narrative_freq">{{freq}}</th>
+      </tfoot>
+    </table>
+  </div>
+</div>
